@@ -117,7 +117,6 @@ pip install -r requirements.txt
 python app.py
 ```
 
----
 
 ## 🐍 Contribution Graph
 
@@ -130,18 +129,19 @@ python app.py
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Harshitha-154&show_icons=true&theme=radical"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harshitha-154&theme=radical"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=Harshitha-154&show_icons=true&theme=tokyonight&hide_border=true"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harshitha-154&theme=tokyonight&hide_border=true"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harshitha-154&layout=compact&theme=tokyonight&hide_border=true"/>
 </p>
 
 ---
 
-
-
 <p align="center">
-  🔥 Built with ❤️ for Cyber Security
+  🔥 Built with ❤️ by <b>Harshitha-154</b>
 </p>
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C853,100:00F7FF&height=120&section=footer"/>
 </p>
+---
+
