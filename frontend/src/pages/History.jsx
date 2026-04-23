@@ -11,7 +11,8 @@ const History = () => {
   const fetchHistory = useCallback(async () => {
     try {
       setError(null);
-      const response = await axios.get('http://127.0.0.1:8000/history');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await axios.get(`${apiUrl}/history`);
       setScans(response.data);
     } catch (err) {
       setError("Failed to establish secure connection to history endpoint.");

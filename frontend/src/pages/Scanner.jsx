@@ -51,7 +51,8 @@ const Scanner = () => {
     await new Promise(r => setTimeout(r, 600));
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/analyze', { url: targetUrl });
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await axios.post(`${apiUrl}/analyze`, { url: targetUrl });
       if (response.data.error) {
         setError(response.data.error);
         soundManager.playAlertSound();
@@ -64,7 +65,7 @@ const Scanner = () => {
         }
       }
     } catch (err) {
-      setError("Network payload deployment failed. Ensure backend API is active on port 8000.");
+      setError("Network payload deployment failed. Ensure backend API is deployed and accessible.");
       soundManager.playAlertSound();
     } finally {
       setLoading(false);
