@@ -51,8 +51,7 @@ const Scanner = () => {
     await new Promise(r => setTimeout(r, 600));
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-      const response = await axios.post(`${apiUrl}/analyze`, { url: targetUrl });
+      const response = await axios.post('/api/analyze', { url: targetUrl });
       if (response.data.error) {
         setError(response.data.error);
         soundManager.playAlertSound();

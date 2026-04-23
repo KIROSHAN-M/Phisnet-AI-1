@@ -1,8 +1,10 @@
 import pickle, os
 import numpy as np
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import tldextract
 
@@ -32,7 +34,7 @@ init_db()
 class URLRequest(BaseModel):
     url: str
 
-@app.post("/analyze")
+@app.post("/api/analyze")
 def analyze(req: URLRequest):
     url = req.url.strip()
 
@@ -87,10 +89,23 @@ def analyze(req: URLRequest):
     save_scan(url, label, score, bm["matched_brand"])
     return result
 
-@app.get("/history")
+@app.get("/api/history")
 def history():
     return get_history()
 
-@app.get("/")
+@app.get("/api/status")
 def root():
-    return {"status": "PhishNet AI is running"}
+    return {"status": "PhishNet AI Backend is running"}
+
+# ── Serve Frontend ──
+frontend_dist = os.path.join(BASE_DIR, '../frontend/dist')
+if os.path.exists(frontend_dist):
+    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist, "assets")), name="assets")
+    
+    @app.get("/{catchall:path}")
+    def serve_frontend(catchall: str):
+        return FileResponse(os.path.join(frontend_dist, 'index.html'))
+else:
+    @app.get("/")
+    def no_frontend():
+        return {"error": "Frontend build not found. Run 'npm run build' in the frontend folder."}
